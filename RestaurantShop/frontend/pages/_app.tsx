@@ -1,23 +1,25 @@
 import { AppProps } from "next/app";
-import Layout from "../components/Layout";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, useMantineTheme } from "@mantine/core";
+
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  useQuery,
-  gql,
+  HttpLink,
 } from "@apollo/client";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337/graphql";
 
 function App(props: AppProps) {
   const { Component, pageProps } = props;
 
   const client = new ApolloClient({
-    uri: "http://localhost:1337/graphql",
+    link: new HttpLink({
+      uri: API_URL,
+    }),
     cache: new InMemoryCache(),
+    connectToDevTools: true,
   });
-
-  
 
   return (
     <>
@@ -26,13 +28,10 @@ function App(props: AppProps) {
           withGlobalStyles
           withNormalizeCSS
           theme={{
-            /** Put your mantine theme override here */
             colorScheme: "light",
           }}
         >
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </MantineProvider>
       </ApolloProvider>
     </>

@@ -4,18 +4,26 @@
   "info": {
     "singularName": "restaurant",
     "pluralName": "restaurants",
-    "displayName": "Restaurant"
+    "displayName": "Restaurant",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string"
     },
-    "Description": {
+    "description": {
       "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
